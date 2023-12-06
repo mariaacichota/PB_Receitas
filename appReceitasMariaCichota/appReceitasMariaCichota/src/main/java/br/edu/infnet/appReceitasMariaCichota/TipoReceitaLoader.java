@@ -2,16 +2,18 @@ package br.edu.infnet.appReceitasMariaCichota;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 
 import br.edu.infnet.appReceitasMariaCichota.model.domain.TipoReceita;
+import br.edu.infnet.appReceitasMariaCichota.model.service.TipoReceitaService;
 
 public class TipoReceitaLoader implements ApplicationRunner {
-private Map<Integer, TipoReceita> mapaTipoReceita = new HashMap<Integer, TipoReceita>();
+
+	@Autowired
+	private TipoReceitaService tipoReceitaService; 
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -28,16 +30,12 @@ private Map<Integer, TipoReceita> mapaTipoReceita = new HashMap<Integer, TipoRec
 			tipoReceita.setCodigo(Integer.valueOf(campos[0]));
 			tipoReceita.setDescricao(campos[1]);
 			
-			mapaTipoReceita.put(tipoReceita.getCodigo(), tipoReceita);
+			tipoReceitaService.incluirTipoReceita(tipoReceita);
 			
 			linha = leitura.readLine();
 		}
 		
-		for(Integer codigo : mapaTipoReceita.keySet()) {
-			System.out.println("[CÓDIGO] " + codigo);
-		}
-		
-		for(TipoReceita tipoReceita : mapaTipoReceita.values()) {
+		for(TipoReceita tipoReceita : tipoReceitaService.obterListaTipoReceita()) {
 			System.out.println("[TIPO RECEITA] " + tipoReceita);
 		}
 		

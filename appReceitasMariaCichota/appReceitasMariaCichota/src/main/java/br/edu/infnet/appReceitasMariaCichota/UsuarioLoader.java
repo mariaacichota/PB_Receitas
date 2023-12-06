@@ -2,19 +2,19 @@ package br.edu.infnet.appReceitasMariaCichota;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Map;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import br.edu.infnet.appReceitasMariaCichota.model.domain.Usuario;
+import br.edu.infnet.appReceitasMariaCichota.model.service.UsuarioService;
 
 @Component
 public class UsuarioLoader implements ApplicationRunner {
 	
-	private Map<Integer, Usuario> mapaUsuario = new HashMap<Integer, Usuario>();
+	@Autowired
+	private UsuarioService usuarioService;
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -37,16 +37,12 @@ public class UsuarioLoader implements ApplicationRunner {
 			usuario.setFoto(campos[6]);
 			usuario.setDescricao(campos[7]);
 			
-			mapaUsuario.put(usuario.getCodigo(), usuario);
+			usuarioService.incluirUsuario(usuario);
 			
 			linha = leitura.readLine();
 		}
 		
-		for(Integer codigo : mapaUsuario.keySet()) {
-			System.out.println("[CÓDIGO] " + codigo);
-		}
-		
-		for(Usuario usuario : mapaUsuario.values()) {
+		for(Usuario usuario : usuarioService.obterListaUsuario()) {
 			System.out.println("[USUÁRIO] " + usuario);
 		}
 		

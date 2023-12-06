@@ -10,6 +10,22 @@ public class Usuario {
 	private String foto;
 	private String descricao;
 	
+	public Usuario(Integer codigo, String nome, String endereco, String email, String telefone, String senha,
+			String foto, String descricao) {
+		this.codigo = codigo;
+		this.nome = nome;
+		this.endereco = endereco;
+		this.email = email;
+		this.telefone = telefone;
+		this.senha = senha;
+		this.foto = foto;
+		this.descricao = descricao;
+	}
+
+	public Usuario() {
+	}
+	
+
 	@Override
 	public String toString() {
 

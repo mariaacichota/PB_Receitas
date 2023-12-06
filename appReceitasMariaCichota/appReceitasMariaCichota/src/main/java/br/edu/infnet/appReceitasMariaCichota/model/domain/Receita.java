@@ -3,6 +3,7 @@ package br.edu.infnet.appReceitasMariaCichota.model.domain;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class Receita {
 	private int codigo;
@@ -17,7 +18,34 @@ public class Receita {
 	private int codigoTipo;
 	private String catalogada;
 	private Date dataPublicacao;
+	private TipoReceita tipoReceita;
+	private Usuario usuario;
+	private List<Ingrediente> ingredientes;
 	
+	public TipoReceita getTipoReceita() {
+		return tipoReceita;
+	}
+
+	public void setTipoReceita(TipoReceita tipoReceita) {
+		this.tipoReceita = tipoReceita;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public List<Ingrediente> getIngredientes() {
+		return ingredientes;
+	}
+
+	public void setIngredientes(List<Ingrediente> ingredientes) {
+		this.ingredientes = ingredientes;
+	}
+
 	public String formatDate(Date data) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
         return dateFormat.format(data);
@@ -27,9 +55,10 @@ public class Receita {
 	public String toString() {
 
 		return String.format("Codigo (%d) - Codigo Ingrediente (%d) - Título (%s) - Descrição (%s) - Quantidade (%d) - Medida (%s)"
-				+ " - Tempo de Preparo (%d) - Anexos (%s) - Aprovada (%s) - Código Tipo (%d) - Catalogada (%s) - Data de Publicação (%s) ", 
+				+ " - Tempo de Preparo (%d) - Anexos (%s) - Aprovada (%s) - Código Tipo (%d) - Catalogada (%s) - Data de Publicação (%s)"
+				+ " - Tipo de Receita (%s) - Usuario (%s) - Ingredientes (%s) ", 
 				codigo, codigoIngrediente, titulo, descricao, quantidade, medida, tempoPreparo, anexos, aprovada, codigoTipo, catalogada, 
-				formatDate(dataPublicacao)
+				formatDate(dataPublicacao), tipoReceita, usuario, ingredientes
 			);
 	}
 	

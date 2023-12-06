@@ -2,16 +2,17 @@ package br.edu.infnet.appReceitasMariaCichota;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Map;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 
 import br.edu.infnet.appReceitasMariaCichota.model.domain.ReceitaFavoritada;
+import br.edu.infnet.appReceitasMariaCichota.model.service.ReceitaFavoritadaService;
 
 public class ReceitaFavoritadaLoader implements ApplicationRunner {
-private Map<Integer, ReceitaFavoritada> mapaReceitaFavoritada = new HashMap<Integer, ReceitaFavoritada>();
+	
+	@Autowired
+	private ReceitaFavoritadaService receitaFavoritadaService;
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -32,16 +33,12 @@ private Map<Integer, ReceitaFavoritada> mapaReceitaFavoritada = new HashMap<Inte
 			receitaFavoritada.setLike(Integer.valueOf(campos[4]));
 			receitaFavoritada.setDeslike(Integer.valueOf(campos[5]));
 			
-			mapaReceitaFavoritada.put(receitaFavoritada.getCodigo(), receitaFavoritada);
+			receitaFavoritadaService.incluirReceitaFavoritada(receitaFavoritada);
 			
 			linha = leitura.readLine();
 		}
 		
-		for(Integer codigo : mapaReceitaFavoritada.keySet()) {
-			System.out.println("[CÓDIGO] " + codigo);
-		}
-		
-		for(ReceitaFavoritada receitaFavoritada : mapaReceitaFavoritada.values()) {
+		for(ReceitaFavoritada receitaFavoritada : receitaFavoritadaService.obterListaReceitaFavoritada()) {
 			System.out.println("[RECEITA FAVORITADA] " + receitaFavoritada);
 		}
 		

@@ -4,6 +4,15 @@ public class TipoReceita {
 	private int codigo;
 	private String descricao;
 	
+	public TipoReceita(Integer codigo, String descricao) {
+		this.codigo = codigo;
+		this.descricao = descricao;
+	}
+
+	public TipoReceita() {
+	}
+
+	
 	@Override
 	public String toString() {
 

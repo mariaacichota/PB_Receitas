@@ -7,7 +7,16 @@ public class FeedBack {
 	private int codigoReceita;
 	private int like;
 	private int deslike;
+	private Usuario usuario;
 	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	@Override
 	public String toString() {
 

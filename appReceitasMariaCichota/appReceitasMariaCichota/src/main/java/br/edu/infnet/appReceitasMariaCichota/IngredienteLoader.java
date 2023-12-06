@@ -2,18 +2,20 @@ package br.edu.infnet.appReceitasMariaCichota;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import br.edu.infnet.appReceitasMariaCichota.model.domain.Ingrediente;
+import br.edu.infnet.appReceitasMariaCichota.model.service.IngredienteService;
 
 @Component
 public class IngredienteLoader implements ApplicationRunner {
-	private Map<Integer, Ingrediente> mapaIngrediente = new HashMap<Integer, Ingrediente>();
+	
+	@Autowired
+	private IngredienteService ingredienteService;
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -29,17 +31,13 @@ public class IngredienteLoader implements ApplicationRunner {
 			Ingrediente ingrediente = new Ingrediente();
 			ingrediente.setCodigo(Integer.valueOf(campos[0]));
 			ingrediente.setDescricao(campos[1]);
-			
-			mapaIngrediente.put(ingrediente.getCodigo(), ingrediente);
+
+			ingredienteService.incluirIngrediente(ingrediente);
 			
 			linha = leitura.readLine();
 		}
 		
-		for(Integer codigo : mapaIngrediente.keySet()) {
-			System.out.println("[CÓDIGO] " + codigo);
-		}
-		
-		for(Ingrediente ingrediente : mapaIngrediente.values()) {
+		for(Ingrediente ingrediente : ingredienteService.obterListaIngrediente()) {
 			System.out.println("[INGREDIENTE] " + ingrediente);
 		}
 		
