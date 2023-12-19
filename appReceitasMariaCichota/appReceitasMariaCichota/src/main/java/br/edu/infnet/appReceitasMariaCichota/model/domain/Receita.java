@@ -5,7 +5,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Receita {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer Id;
 	private int codigo;
 	private int codigoIngrediente;
 	private String titulo;
@@ -18,12 +33,42 @@ public class Receita {
 	private int codigoTipo;
 	private String catalogada;
 	private Date dataPublicacao;
+	
+	@ManyToOne
+	@JoinColumn(name = "idTipoReceita")
 	private TipoReceita tipoReceita;
+	
+	@ManyToOne
+	@JoinColumn(name = "idUsuario")
 	private Usuario usuario;
-	private List<Ingrediente> ingredientes;
+	
+	@OneToMany
+	@JoinColumn(name = "idReceita")
+    private List<Ingrediente> ingredientes;
+
+	@Override
+	public String toString() {
+
+		return String.format("Codigo (%d) - Codigo Ingrediente (%d) - Título (%s) - Descrição (%s) - Quantidade (%d) - Medida (%s)"
+				+ " - Tempo de Preparo (%d) - Anexos (%s) - Aprovada (%s) - Código Tipo (%d) - Catalogada (%s) - Data de Publicação (%s)"
+				+ " - Tipo de Receita (%s) - Usuario (%s) - Ingredientes (%s) ", 
+				codigo, codigoIngrediente, titulo, descricao, quantidade, medida, tempoPreparo, anexos, aprovada, codigoTipo, catalogada, 
+				formatDate(dataPublicacao), tipoReceita, usuario, ingredientes
+			);
+	}
+	
+
 	
 	public TipoReceita getTipoReceita() {
 		return tipoReceita;
+	}
+	
+	public Integer getId() {
+		return Id;
+	}
+
+	public void setId(Integer id) {
+		Id = id;
 	}
 
 	public void setTipoReceita(TipoReceita tipoReceita) {
@@ -50,17 +95,6 @@ public class Receita {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
         return dateFormat.format(data);
     }
-	
-	@Override
-	public String toString() {
-
-		return String.format("Codigo (%d) - Codigo Ingrediente (%d) - Título (%s) - Descrição (%s) - Quantidade (%d) - Medida (%s)"
-				+ " - Tempo de Preparo (%d) - Anexos (%s) - Aprovada (%s) - Código Tipo (%d) - Catalogada (%s) - Data de Publicação (%s)"
-				+ " - Tipo de Receita (%s) - Usuario (%s) - Ingredientes (%s) ", 
-				codigo, codigoIngrediente, titulo, descricao, quantidade, medida, tempoPreparo, anexos, aprovada, codigoTipo, catalogada, 
-				formatDate(dataPublicacao), tipoReceita, usuario, ingredientes
-			);
-	}
 	
 	public void setDataPublicacao(String dateString) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

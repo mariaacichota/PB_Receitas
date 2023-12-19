@@ -6,10 +6,14 @@ import java.io.FileReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 import br.edu.infnet.appReceitasMariaCichota.model.domain.TipoReceita;
 import br.edu.infnet.appReceitasMariaCichota.model.service.TipoReceitaService;
 
+@Order(2)
+@Component
 public class TipoReceitaLoader implements ApplicationRunner {
 
 	@Autowired

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 import br.edu.infnet.appReceitasMariaCichota.model.domain.Ingrediente;
 import br.edu.infnet.appReceitasMariaCichota.model.domain.Receita;
@@ -14,6 +16,8 @@ import br.edu.infnet.appReceitasMariaCichota.model.domain.TipoReceita;
 import br.edu.infnet.appReceitasMariaCichota.model.domain.Usuario;
 import br.edu.infnet.appReceitasMariaCichota.model.service.ReceitaService;
 
+@Order(4)
+@Component
 public class ReceitaLoader implements ApplicationRunner {
 	@Autowired
 	private ReceitaService receitaService;
@@ -35,7 +39,6 @@ public class ReceitaLoader implements ApplicationRunner {
 			
 			Receita receita = new Receita();
 			receita.setCodigo(Integer.valueOf(campos[0]));
-			//receita.setCodigoIngrediente(Integer.valueOf(campos[1]));
 			receita.setTitulo(campos[2]);
 			receita.setDescricao(campos[3]);
 			receita.setQuantidade(Integer.valueOf(campos[4]));

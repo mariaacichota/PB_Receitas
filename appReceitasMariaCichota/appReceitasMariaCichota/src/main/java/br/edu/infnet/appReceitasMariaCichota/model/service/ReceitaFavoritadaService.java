@@ -1,23 +1,23 @@
 package br.edu.infnet.appReceitasMariaCichota.model.service;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.appReceitasMariaCichota.model.domain.ReceitaFavoritada;
+import br.edu.infnet.appReceitasMariaCichota.model.repositories.ReceitaFavoritadaRepository;
 
 @Service
 public class ReceitaFavoritadaService {
-	private Map<Integer, ReceitaFavoritada> mapaReceitaFavoritada = new HashMap<Integer, ReceitaFavoritada>();
-	
+	@Autowired
+	private ReceitaFavoritadaRepository receitaFavoritadaRepository;
 	
 	public void incluirReceitaFavoritada (ReceitaFavoritada receitaFavoritada) {
-		mapaReceitaFavoritada.put(receitaFavoritada.getCodigo(), receitaFavoritada);
+		receitaFavoritadaRepository.save(receitaFavoritada);
 	}
 	
 	public Collection<ReceitaFavoritada> obterListaReceitaFavoritada() {
-		return mapaReceitaFavoritada.values();
+		return (Collection<ReceitaFavoritada>) receitaFavoritadaRepository.findAll();
 	}
 }

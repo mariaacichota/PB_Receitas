@@ -1,22 +1,23 @@
 package br.edu.infnet.appReceitasMariaCichota.model.service;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.appReceitasMariaCichota.model.domain.Receita;
+import br.edu.infnet.appReceitasMariaCichota.model.repositories.ReceitaRepository;
 
 @Service
 public class ReceitaService {
-	private Map<Integer, Receita> mapaReceita = new HashMap<Integer, Receita>();
+	@Autowired
+	private ReceitaRepository receitaRepository;
 	
 	public void incluirReceita (Receita receita) {
-		mapaReceita.put(receita.getCodigo(), receita);
+		receitaRepository.save(receita);
 	}
 	
 	public Collection<Receita> obterListaReceita() {
-		return mapaReceita.values();
+		return (Collection<Receita>) receitaRepository.findAll();
 	}
 }

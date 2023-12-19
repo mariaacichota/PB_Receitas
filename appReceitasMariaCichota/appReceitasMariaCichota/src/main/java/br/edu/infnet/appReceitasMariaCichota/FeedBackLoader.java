@@ -6,11 +6,14 @@ import java.io.FileReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import br.edu.infnet.appReceitasMariaCichota.model.domain.FeedBack;
+import br.edu.infnet.appReceitasMariaCichota.model.domain.Usuario;
 import br.edu.infnet.appReceitasMariaCichota.model.service.FeedBackService;
 
+@Order(6)
 @Component
 public class FeedBackLoader implements ApplicationRunner {
 	
@@ -28,13 +31,23 @@ public class FeedBackLoader implements ApplicationRunner {
 		while (linha != null) {
 			campos = linha.split(";");
 			
+			Usuario usuario = new Usuario();
+			usuario.setCodigo(Integer.valueOf(campos[5]));
+			usuario.setNome(campos[6]);
+			usuario.setEndereco(campos[7]);
+			usuario.setEmail(campos[8]);
+			usuario.setTelefone(campos[9]);
+			usuario.setSenha(campos[10]);
+			usuario.setFoto(campos[11]);
+			usuario.setDescricao(campos[12]);
+			
 			FeedBack feedback = new FeedBack();
 			feedback.setCodigo(Integer.valueOf(campos[0]));
 			feedback.setDescricao(campos[1]);
-			feedback.setCodigoUsuario(Integer.valueOf(campos[2]));
-			feedback.setCodigoReceita(Integer.valueOf(campos[3]));
-			feedback.setLike(Integer.valueOf(campos[4]));
-			feedback.setDeslike(Integer.valueOf(campos[5]));
+			feedback.setCodigoReceita(Integer.valueOf(campos[2]));
+			feedback.setLike(Integer.valueOf(campos[3]));
+			feedback.setDeslike(Integer.valueOf(campos[4]));
+			feedback.setUsuario(usuario);
 			
 			feedbackService.incluirFeedBack(feedback);
 			

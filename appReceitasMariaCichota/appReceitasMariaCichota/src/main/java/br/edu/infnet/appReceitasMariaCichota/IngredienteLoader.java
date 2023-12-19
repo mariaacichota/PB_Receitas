@@ -6,11 +6,13 @@ import java.io.FileReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import br.edu.infnet.appReceitasMariaCichota.model.domain.Ingrediente;
 import br.edu.infnet.appReceitasMariaCichota.model.service.IngredienteService;
 
+@Order(3)
 @Component
 public class IngredienteLoader implements ApplicationRunner {
 	

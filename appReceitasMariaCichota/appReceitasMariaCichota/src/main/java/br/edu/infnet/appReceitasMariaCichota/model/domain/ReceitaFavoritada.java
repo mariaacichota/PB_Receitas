@@ -1,12 +1,28 @@
 package br.edu.infnet.appReceitasMariaCichota.model.domain;
 
 import java.util.Date;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+@Entity
 public class ReceitaFavoritada {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer Id;
 	private int codigo;
-	private int codigoUsuario;
+
+	@ManyToOne
+	@JoinColumn(name = "idUsuario")
+	private Usuario usuario;
+
 	private int codigoReceita;
 	private Date dataModificacao;
 	private int like;
@@ -21,8 +37,16 @@ public class ReceitaFavoritada {
 	public String toString() {
 
 		return String.format("Codigo (%d) - Codigo Usuario (%s) - Codigo Receita (%s) - Data Modificacao (%s) - Like (%d) - Deslike (%d) ", 
-				codigo, codigoUsuario, codigoReceita, formatDate(dataModificacao), like, deslike
+				codigo, usuario, codigoReceita, formatDate(dataModificacao), like, deslike
 			);
+	}
+	
+	public Integer getId() {
+		return Id;
+	}
+
+	public void setId(Integer id) {
+		Id = id;
 	}
 	
 	public int getLike() {
@@ -49,14 +73,15 @@ public class ReceitaFavoritada {
 		this.codigo = codigo;
 	}
 	
-	public int getCodigoUsuario() {
-		return codigoUsuario;
-	}
 	
-	public void setCodigoUsuario(int codigoUsuario) {
-		this.codigoUsuario = codigoUsuario;
+	public Usuario getUsuario() {
+		return usuario;
 	}
-	
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public int getCodigoReceita() {
 		return codigoReceita;
 	}
