@@ -21,8 +21,8 @@ public class Endereco {
 	public Endereco() {
 	}
 	
-	public Endereco(Integer id) {
-		this.Id = id;
+	public Endereco(String cep) {
+		this.cep = cep;
 	}
 	
 	public Integer getId() {

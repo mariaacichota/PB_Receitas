@@ -20,7 +20,7 @@ public class Usuario {
 	private int codigo;
 	private String nome;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
 	@JoinColumn(name = "idEndereco")
 	private Endereco endereco;
 	
