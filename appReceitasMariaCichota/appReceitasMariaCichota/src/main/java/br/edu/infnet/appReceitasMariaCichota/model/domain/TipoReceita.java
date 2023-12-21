@@ -2,14 +2,17 @@ package br.edu.infnet.appReceitasMariaCichota.model.domain;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "tipo_receita")
 public class TipoReceita {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +20,7 @@ public class TipoReceita {
 	private int codigo;
 	private String descricao;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "idTipoReceita")
 	private List<Receita> receitas;
 	
@@ -29,6 +32,9 @@ public class TipoReceita {
 	public TipoReceita() {
 	}
 
+	public TipoReceita(Integer id) {
+		this.Id = id;
+	}
 	
 	@Override
 	public String toString() {

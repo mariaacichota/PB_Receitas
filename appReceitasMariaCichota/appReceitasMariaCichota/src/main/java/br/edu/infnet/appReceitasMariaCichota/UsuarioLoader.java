@@ -8,7 +8,9 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import br.edu.infnet.appReceitasMariaCichota.model.domain.Endereco;
 import br.edu.infnet.appReceitasMariaCichota.model.domain.Usuario;
+import br.edu.infnet.appReceitasMariaCichota.model.service.EnderecoService;
 import br.edu.infnet.appReceitasMariaCichota.model.service.UsuarioService;
 
 @Order(1)
@@ -17,6 +19,9 @@ public class UsuarioLoader implements ApplicationRunner {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private EnderecoService enderecoService;
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -29,10 +34,13 @@ public class UsuarioLoader implements ApplicationRunner {
 		while (linha != null) {
 			campos = linha.split(";");
 			
+			String cep = campos[2];
+			Endereco endereco = enderecoService.buscarCep(cep);
+			
 			Usuario usuario = new Usuario();
 			usuario.setCodigo(Integer.valueOf(campos[0]));
 			usuario.setNome(campos[1]);
-			usuario.setEndereco(campos[2]);
+			usuario.setEndereco(endereco);
 			usuario.setEmail(campos[3]);
 			usuario.setTelefone(campos[4]);
 			usuario.setSenha(campos[5]);

@@ -1,5 +1,6 @@
 package br.edu.infnet.appReceitasMariaCichota.model.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,7 +16,7 @@ public class Ingrediente {
 	private int codigo;
 	private String descricao;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "idReceita")
 	private Receita receita;
 
@@ -33,6 +34,13 @@ public class Ingrediente {
 		return String.format("Código (%d) - Descrição (%s) ", 
 				codigo, descricao
 			);
+	}
+
+	public Ingrediente (Integer id) {
+		this.Id = id;
+	}
+
+	public Ingrediente () {
 	}
 	
 	public Integer getId() {

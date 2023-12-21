@@ -10,6 +10,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import br.edu.infnet.appReceitasMariaCichota.model.domain.Ingrediente;
+import br.edu.infnet.appReceitasMariaCichota.model.domain.Receita;
 import br.edu.infnet.appReceitasMariaCichota.model.service.IngredienteService;
 
 @Order(3)
@@ -30,9 +31,13 @@ public class IngredienteLoader implements ApplicationRunner {
 		while (linha != null) {
 			campos = linha.split(";");
 			
+			Receita receita = new Receita();
+			receita.setId(Integer.valueOf(campos[2]));
+			
 			Ingrediente ingrediente = new Ingrediente();
 			ingrediente.setCodigo(Integer.valueOf(campos[0]));
 			ingrediente.setDescricao(campos[1]);
+			ingrediente.setReceita(receita);
 
 			ingredienteService.incluirIngrediente(ingrediente);
 			

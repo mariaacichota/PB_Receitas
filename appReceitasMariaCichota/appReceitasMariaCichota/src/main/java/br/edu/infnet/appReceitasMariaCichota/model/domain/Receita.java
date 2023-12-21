@@ -57,7 +57,12 @@ public class Receita {
 			);
 	}
 	
-
+	public Receita(Integer id) {
+		this.Id = id;
+	}
+	
+	public Receita() {
+	}
 	
 	public TipoReceita getTipoReceita() {
 		return tipoReceita;

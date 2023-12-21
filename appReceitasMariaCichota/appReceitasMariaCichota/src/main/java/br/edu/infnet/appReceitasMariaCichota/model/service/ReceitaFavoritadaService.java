@@ -20,4 +20,8 @@ public class ReceitaFavoritadaService {
 	public Collection<ReceitaFavoritada> obterListaReceitaFavoritada() {
 		return (Collection<ReceitaFavoritada>) receitaFavoritadaRepository.findAll();
 	}
+
+	public void excluir (Integer id) {
+		receitaFavoritadaRepository.deleteById(id);
+	}
 }

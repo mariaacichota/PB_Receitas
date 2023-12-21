@@ -2,12 +2,15 @@ package br.edu.infnet.appReceitasMariaCichota.model.domain;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Usuario {
@@ -16,25 +19,29 @@ public class Usuario {
 	private Integer Id;
 	private int codigo;
 	private String nome;
-	private String endereco;
+	
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "idEndereco")
+	private Endereco endereco;
+	
 	private String email;
 	private String telefone;
 	private String senha;
 	private String foto;
 	private String descricao;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idUsuario")
 	private List<Receita> receitas;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idUsuario")
 	private List<FeedBack> feedbacks;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idUsuario")
 	private List<ReceitaFavoritada> receitaFavoritadas;
-
+	
 	public List<Receita> getReceitas() {
 		return receitas;
 	}
@@ -59,7 +66,7 @@ public class Usuario {
 		this.receitaFavoritadas = receitaFavoritadas;
 	}
 
-	public Usuario(Integer codigo, String nome, String endereco, String email, String telefone, String senha,
+	public Usuario(Integer codigo, String nome, Endereco endereco, String email, String telefone, String senha,
 			String foto, String descricao) {
 		this.codigo = codigo;
 		this.nome = nome;
@@ -90,6 +97,10 @@ public class Usuario {
 		this.Id = id;
 	}
 
+	public Usuario(Integer id) {
+		this.Id = id;
+	}
+	
 	public int getCodigo() {
 		return codigo;
 	}
@@ -106,11 +117,11 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public String getEndereco() {
+	public Endereco getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(String endereco) {
+	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
 

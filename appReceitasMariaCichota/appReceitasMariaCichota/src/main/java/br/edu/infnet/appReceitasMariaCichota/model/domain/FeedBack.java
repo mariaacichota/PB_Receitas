@@ -6,8 +6,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "feed_back")
 public class FeedBack {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +26,8 @@ public class FeedBack {
 	private int codigo;
 	private String descricao;
 	private int codigoReceita;
-	private int like;
-	private int deslike;
+	private int iLike;
+	private int iDeslike;
 
 	@ManyToOne
 	@JoinColumn(name = "idUsuario")
@@ -43,6 +45,13 @@ public class FeedBack {
 	public String toString() {
 
 		return String.format("Codigo (%d) - Descrição (%s) ", codigo, descricao);
+	}
+	
+	public FeedBack (Integer id) {
+		this.Id = id;
+	}
+	
+	public FeedBack () {
 	}
 
 	public int getCodigo() {
@@ -69,19 +78,20 @@ public class FeedBack {
 		this.codigoReceita = codigoReceita;
 	}
 
-	public int getLike() {
-		return like;
+	public int getiLike() {
+		return iLike;
 	}
 
-	public void setLike(int like) {
-		this.like = like;
+	public void setiLike(int iLike) {
+		this.iLike = iLike;
 	}
 
-	public int getDeslike() {
-		return deslike;
+	public int getiDeslike() {
+		return iDeslike;
 	}
 
-	public void setDeslike(int deslike) {
-		this.deslike = deslike;
+	public void setiDeslike(int iDeslike) {
+		this.iDeslike = iDeslike;
 	}
+
 }

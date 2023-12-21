@@ -20,4 +20,8 @@ public class ReceitaService {
 	public Collection<Receita> obterListaReceita() {
 		return (Collection<Receita>) receitaRepository.findAll();
 	}
+
+	public void excluir (Integer id) {
+		receitaRepository.deleteById(id);
+	}
 }

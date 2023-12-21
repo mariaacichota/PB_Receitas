@@ -20,4 +20,8 @@ public class IngredienteService {
 	public Collection<Ingrediente> obterListaIngrediente() {
 		return (Collection<Ingrediente>) ingredienteRepository.findAll();
 	}
+
+	public void excluir (Integer id) {
+		ingredienteRepository.deleteById(id);
+	}
 }

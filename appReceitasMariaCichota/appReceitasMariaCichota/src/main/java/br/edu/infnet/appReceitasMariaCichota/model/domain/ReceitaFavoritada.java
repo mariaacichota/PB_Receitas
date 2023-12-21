@@ -8,11 +8,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 @Entity
+@Table(name = "receita_favoritada")
 public class ReceitaFavoritada {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,19 +27,26 @@ public class ReceitaFavoritada {
 
 	private int codigoReceita;
 	private Date dataModificacao;
-	private int like;
-	private int deslike;
+	private int iLike;
+	private int iDeslike;
 	
 	public String formatDate(Date data) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
         return dateFormat.format(data);
     }
 	
+	public ReceitaFavoritada(Integer id) {
+		this.Id = id;
+	}
+	
+	public ReceitaFavoritada() {
+	}
+	
 	@Override
 	public String toString() {
 
 		return String.format("Codigo (%d) - Codigo Usuario (%s) - Codigo Receita (%s) - Data Modificacao (%s) - Like (%d) - Deslike (%d) ", 
-				codigo, usuario, codigoReceita, formatDate(dataModificacao), like, deslike
+				codigo, usuario, codigoReceita, formatDate(dataModificacao), iLike, iDeslike
 			);
 	}
 	
@@ -49,22 +58,22 @@ public class ReceitaFavoritada {
 		Id = id;
 	}
 	
-	public int getLike() {
-		return like;
+	public int getiLike() {
+		return iLike;
 	}
 
-	public void setLike(int like) {
-		this.like = like;
+	public void setiLike(int iLike) {
+		this.iLike = iLike;
 	}
 
-	public int getDeslike() {
-		return deslike;
+	public int getiDeslike() {
+		return iDeslike;
 	}
 
-	public void setDeslike(int deslike) {
-		this.deslike = deslike;
+	public void setiDeslike(int iDeslike) {
+		this.iDeslike = iDeslike;
 	}
-	
+
 	public int getCodigo() {
 		return codigo;
 	}

@@ -20,4 +20,8 @@ public class FeedBackService {
 	public Collection<FeedBack> obterListaFeedBack() {
 		return (Collection<FeedBack>) feedbackRepository.findAll();
 	}
+
+	public void excluir (Integer id) {
+		feedbackRepository.deleteById(id);
+	}
 }

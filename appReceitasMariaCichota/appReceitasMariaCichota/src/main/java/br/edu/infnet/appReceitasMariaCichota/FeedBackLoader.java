@@ -32,21 +32,14 @@ public class FeedBackLoader implements ApplicationRunner {
 			campos = linha.split(";");
 			
 			Usuario usuario = new Usuario();
-			usuario.setCodigo(Integer.valueOf(campos[5]));
-			usuario.setNome(campos[6]);
-			usuario.setEndereco(campos[7]);
-			usuario.setEmail(campos[8]);
-			usuario.setTelefone(campos[9]);
-			usuario.setSenha(campos[10]);
-			usuario.setFoto(campos[11]);
-			usuario.setDescricao(campos[12]);
+			usuario.setId(Integer.valueOf(campos[5]));
 			
 			FeedBack feedback = new FeedBack();
 			feedback.setCodigo(Integer.valueOf(campos[0]));
 			feedback.setDescricao(campos[1]);
 			feedback.setCodigoReceita(Integer.valueOf(campos[2]));
-			feedback.setLike(Integer.valueOf(campos[3]));
-			feedback.setDeslike(Integer.valueOf(campos[4]));
+			feedback.setiLike(Integer.valueOf(campos[3]));
+			feedback.setiDeslike(Integer.valueOf(campos[4]));
 			feedback.setUsuario(usuario);
 			
 			feedbackService.incluirFeedBack(feedback);

@@ -20,4 +20,8 @@ public class TipoReceitaService {
 	public Collection<TipoReceita> obterListaTipoReceita() {
 		return (Collection<TipoReceita>) tipoReceitaRepository.findAll();
 	}
+
+	public void excluir (Integer id) {
+		tipoReceitaRepository.deleteById(id);
+	}
 }
