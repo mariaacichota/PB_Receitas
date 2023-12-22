@@ -148,7 +148,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"titulo\": \"Pudim\",\r\n\t\"descricao\": \"Pudim de doce de leite\",\r\n\t\"quantidade\": 1,\r\n\t\"medida\": \"ML\",\r\n\t\"tempoPreparo\": 30,\r\n\t\"anexos\": \"\",\r\n\t\"aprovada\": \"\",\r\n\t\"catalogada\": \"\",\r\n\t\"dataPublicacao\": \"2023-12-22\"\r\n}",
+							"raw": "{\r\n    \"titulo\": \"Pudim\",\r\n\t\"descricao\": \"Pudim de doce de leite\",\r\n\t\"quantidade\": 1,\r\n\t\"medida\": \"ML\",\r\n\t\"tempoPreparo\": 30,\r\n\t\"anexos\": \"\",\r\n\t\"aprovada\": \"\",\r\n\t\"catalogada\": \"\",\r\n\t\"dataPublicacao\": \"2023-12-22\",\r\n    \"usuario\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -328,7 +328,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n \"descricao\": \"Muito boa\"   \r\n}",
+							"raw": "{\r\n \"descricao\": \"Muito boa\",\r\n \"usuario\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -418,7 +418,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"dataModificacao\":\"2023-12-12\",\r\n\t\"iLike\": 10,\r\n\t\"iDeslike\": 0\r\n}",
+							"raw": "{\r\n\t\"dataModificacao\":\"2023-12-12\",\r\n\t\"iLike\": 10,\r\n\t\"iDeslike\": 0, \r\n    \"usuario\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
