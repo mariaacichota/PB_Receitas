@@ -17,7 +17,6 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
-	private int codigo;
 	private String nome;
 	
 	@OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
@@ -66,9 +65,8 @@ public class Usuario {
 		this.receitaFavoritadas = receitaFavoritadas;
 	}
 
-	public Usuario(Integer codigo, String nome, Endereco endereco, String email, String telefone, String senha,
+	public Usuario(String nome, Endereco endereco, String email, String telefone, String senha,
 			String foto, String descricao) {
-		this.codigo = codigo;
 		this.nome = nome;
 		this.endereco = endereco;
 		this.email = email;
@@ -86,7 +84,7 @@ public class Usuario {
 
 		return String.format(
 				"Codigo (%d) - Nome (%s) - E-mail (%s) - Telefone (%s) - Senha (%s) - Foto (%s) - Descrição (%s)",
-				codigo, nome, email, telefone, senha, foto, descricao);
+				Id, nome, email, telefone, senha, foto, descricao);
 	}
 
 	public Integer getId() {
@@ -99,14 +97,6 @@ public class Usuario {
 
 	public Usuario(Integer id) {
 		this.Id = id;
-	}
-	
-	public int getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
 	}
 
 	public String getNome() {

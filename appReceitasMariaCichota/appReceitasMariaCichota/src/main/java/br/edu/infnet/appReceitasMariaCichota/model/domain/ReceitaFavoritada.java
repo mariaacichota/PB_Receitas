@@ -19,13 +19,15 @@ public class ReceitaFavoritada {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
-	private int codigo;
 
 	@ManyToOne
 	@JoinColumn(name = "idUsuario")
 	private Usuario usuario;
 
-	private int codigoReceita;
+	@ManyToOne
+	@JoinColumn(name = "idReceita")
+	private Receita receita;
+	
 	private Date dataModificacao;
 	private int iLike;
 	private int iDeslike;
@@ -45,8 +47,8 @@ public class ReceitaFavoritada {
 	@Override
 	public String toString() {
 
-		return String.format("Codigo (%d) - Codigo Usuario (%s) - Codigo Receita (%s) - Data Modificacao (%s) - Like (%d) - Deslike (%d) ", 
-				codigo, usuario, codigoReceita, formatDate(dataModificacao), iLike, iDeslike
+		return String.format("Codigo (%d) - Codigo Usuario (%s) - Codigo Receita (%s) - Like (%d) - Deslike (%d) ", 
+				Id, usuario, receita, iLike, iDeslike
 			);
 	}
 	
@@ -73,15 +75,6 @@ public class ReceitaFavoritada {
 	public void setiDeslike(int iDeslike) {
 		this.iDeslike = iDeslike;
 	}
-
-	public int getCodigo() {
-		return codigo;
-	}
-	
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
-	
 	
 	public Usuario getUsuario() {
 		return usuario;
@@ -91,12 +84,12 @@ public class ReceitaFavoritada {
 		this.usuario = usuario;
 	}
 
-	public int getCodigoReceita() {
-		return codigoReceita;
+	public Receita getCodigoReceita() {
+		return receita;
 	}
 	
-	public void setCodigoReceita(int codigoReceita) {
-		this.codigoReceita = codigoReceita;
+	public void setCodigoReceita(Receita receita) {
+		this.receita = receita;
 	}
 	
 	public Date getDataModificacao() {

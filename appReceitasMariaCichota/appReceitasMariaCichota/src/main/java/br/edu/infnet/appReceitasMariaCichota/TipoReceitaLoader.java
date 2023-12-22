@@ -31,8 +31,7 @@ public class TipoReceitaLoader implements ApplicationRunner {
 			campos = linha.split(";");
 			
 			TipoReceita tipoReceita = new TipoReceita();
-			tipoReceita.setCodigo(Integer.valueOf(campos[0]));
-			tipoReceita.setDescricao(campos[1]);
+			tipoReceita.setDescricao(campos[0]);
 			
 			tipoReceitaService.incluirTipoReceita(tipoReceita);
 			

@@ -1,1 +1,4 @@
-1;Maria Cichota;1;maria.cichota@al.infnet.edu.br;(54) 99999-9999;;;Usuario teste 1
+Maria Cichota;99709-160;maria.cichota@al.infnet.edu.br;(54) 99999-9999;;;Usuario teste 1
+Shaun Murphy;77018-449;shaun@al.infnet.edu.br;(54) 99999-9999;;;Usuario teste 2
+Leonel Abreu;69316-524;leonel@al.infnet.edu.br;(54) 99999-9999;;;Usuario teste 3
+Zara Larsson;65035-710;zara@al.infnet.edu.br;(54) 99999-9999;;;Usuario teste 4

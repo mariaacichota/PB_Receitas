@@ -10,6 +10,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import br.edu.infnet.appReceitasMariaCichota.model.domain.FeedBack;
+import br.edu.infnet.appReceitasMariaCichota.model.domain.Receita;
 import br.edu.infnet.appReceitasMariaCichota.model.domain.Usuario;
 import br.edu.infnet.appReceitasMariaCichota.model.service.FeedBackService;
 
@@ -30,16 +31,18 @@ public class FeedBackLoader implements ApplicationRunner {
 		
 		while (linha != null) {
 			campos = linha.split(";");
-			
+
 			Usuario usuario = new Usuario();
-			usuario.setId(Integer.valueOf(campos[5]));
+			usuario.setId(Integer.valueOf(campos[3]));
+			
+			Receita receita = new Receita();
+			receita.setId(Integer.valueOf(campos[4]));
 			
 			FeedBack feedback = new FeedBack();
-			feedback.setCodigo(Integer.valueOf(campos[0]));
-			feedback.setDescricao(campos[1]);
-			feedback.setCodigoReceita(Integer.valueOf(campos[2]));
-			feedback.setiLike(Integer.valueOf(campos[3]));
-			feedback.setiDeslike(Integer.valueOf(campos[4]));
+			feedback.setDescricao(campos[0]);
+			feedback.setCodigoReceita(receita);
+			feedback.setiLike(Integer.valueOf(campos[1]));
+			feedback.setiDeslike(Integer.valueOf(campos[2]));
 			feedback.setUsuario(usuario);
 			
 			feedbackService.incluirFeedBack(feedback);

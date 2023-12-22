@@ -17,15 +17,13 @@ public class TipoReceita {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
-	private int codigo;
 	private String descricao;
 	
 	@OneToMany(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "idTipoReceita")
 	private List<Receita> receitas;
 	
-	public TipoReceita(Integer codigo, String descricao) {
-		this.codigo = codigo;
+	public TipoReceita(String descricao) {
 		this.descricao = descricao;
 	}
 
@@ -40,7 +38,7 @@ public class TipoReceita {
 	public String toString() {
 
 		return String.format("Código (%d) - Descrição (%s) ", 
-				codigo, descricao
+				Id, descricao
 			);
 	}
 	
@@ -50,14 +48,6 @@ public class TipoReceita {
 
 	public void setId(Integer id) {
 		Id = id;
-	}
-	
-	public int getCodigo() {
-		return codigo;
-	}
-	
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
 	}
 	
 	public String getDescricao() {

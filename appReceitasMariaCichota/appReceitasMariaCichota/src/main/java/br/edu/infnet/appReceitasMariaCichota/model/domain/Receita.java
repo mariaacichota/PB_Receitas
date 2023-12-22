@@ -2,10 +2,13 @@ package br.edu.infnet.appReceitasMariaCichota.model.domain;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,8 +24,6 @@ public class Receita {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
-	private int codigo;
-	private int codigoIngrediente;
 	private String titulo;
 	private String descricao;
 	private double quantidade;
@@ -30,9 +31,8 @@ public class Receita {
 	private int tempoPreparo;
 	private String anexos;
 	private String aprovada;
-	private int codigoTipo;
 	private String catalogada;
-	private Date dataPublicacao;
+	private LocalDate dataPublicacao;
 	
 	@ManyToOne
 	@JoinColumn(name = "idTipoReceita")
@@ -42,20 +42,34 @@ public class Receita {
 	@JoinColumn(name = "idUsuario")
 	private Usuario usuario;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idReceita")
     private List<Ingrediente> ingredientes;
+	
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idReceita")
+	private List<ReceitaFavoritada> receitaFavoritada;
+	
 
 	@Override
 	public String toString() {
 
-		return String.format("Codigo (%d) - Codigo Ingrediente (%d) - Título (%s) - Descrição (%s) - Quantidade (%d) - Medida (%s)"
-				+ " - Tempo de Preparo (%d) - Anexos (%s) - Aprovada (%s) - Código Tipo (%d) - Catalogada (%s) - Data de Publicação (%s)"
-				+ " - Tipo de Receita (%s) - Usuario (%s) - Ingredientes (%s) ", 
-				codigo, codigoIngrediente, titulo, descricao, quantidade, medida, tempoPreparo, anexos, aprovada, codigoTipo, catalogada, 
-				formatDate(dataPublicacao), tipoReceita, usuario, ingredientes
-			);
+		return String.format("Codigo (%d) - Título (%s) - Descrição (%s) - Quantidade (%f) - Medida (%s)"
+		        + " - Tempo de Preparo (%d) - Anexos (%s) - Aprovada (%s) - Catalogada (%s)"
+		        + " - Tipo de Receita (%s) - Usuario (%s)",
+		        Id, titulo, descricao, quantidade, medida, tempoPreparo, anexos, aprovada, catalogada,
+		        tipoReceita, usuario
+		);
 	}
+	
+	public List<ReceitaFavoritada> getReceitaFavoritada() {
+		return receitaFavoritada;
+	}
+
+	public void setReceitaFavoritada(List<ReceitaFavoritada> receitaFavoritada) {
+		this.receitaFavoritada = receitaFavoritada;
+	}
+
 	
 	public Receita(Integer id) {
 		this.Id = id;
@@ -101,31 +115,9 @@ public class Receita {
         return dateFormat.format(data);
     }
 	
-	public void setDataPublicacao(String dateString) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-        try {
-            this.dataPublicacao = dateFormat.parse(dateString);
-        } catch (ParseException e) {
-            e.printStackTrace(); 
-        }
+	public void setDataPublicacao(LocalDate dataPublicacao2) {
+		this.dataPublicacao = dataPublicacao2;
     }
-	
-	public int getCodigo() {
-		return codigo;
-	}
-	
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
-	
-	public int getCodigoIngrediente() {
-		return codigoIngrediente;
-	}
-	
-	public void setCodigoIngrediente(int codigoIngrediente) {
-		this.codigoIngrediente = codigoIngrediente;
-	}
 	
 	public String getTitulo() {
 		return titulo;
@@ -175,14 +167,6 @@ public class Receita {
 		this.anexos = anexos;
 	}
 	
-	public int getCodigoTipo() {
-		return codigoTipo;
-	}
-	
-	public void setCodigoTipo(int codigoTipo) {
-		this.codigoTipo = codigoTipo;
-	}
-	
 	public String getAprovada() {
 		return aprovada;
 	}
@@ -199,7 +183,7 @@ public class Receita {
 		this.catalogada = catalogada;
 	}
 
-	public Date getDataPublicacao() {
+	public LocalDate getDataPublicacao() {
 		return dataPublicacao;
 	}
 }

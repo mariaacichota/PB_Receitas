@@ -1,0 +1,7 @@
+Drink
+Suco
+Café da Manhã
+Brunch
+Almoço
+Jantar
+Sobremesa

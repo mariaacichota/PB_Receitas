@@ -31,13 +31,12 @@ public class IngredienteLoader implements ApplicationRunner {
 		while (linha != null) {
 			campos = linha.split(";");
 			
-			Receita receita = new Receita();
-			receita.setId(Integer.valueOf(campos[2]));
+		//	Receita receita = new Receita();
+		//	receita.setId(Integer.valueOf(campos[1]));
 			
 			Ingrediente ingrediente = new Ingrediente();
-			ingrediente.setCodigo(Integer.valueOf(campos[0]));
-			ingrediente.setDescricao(campos[1]);
-			ingrediente.setReceita(receita);
+			ingrediente.setDescricao(campos[0]);
+		//	ingrediente.setReceita(receita);
 
 			ingredienteService.incluirIngrediente(ingrediente);
 			

@@ -2,6 +2,11 @@ package br.edu.infnet.appReceitasMariaCichota;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -32,25 +37,21 @@ public class ReceitaLoader implements ApplicationRunner {
 			campos = linha.split(";");
 
 			Usuario usuario = new Usuario();
-			usuario.setId(Integer.valueOf(campos[5]));
+			usuario.setId(Integer.valueOf(campos[10]));
 
 			TipoReceita tipoReceita = new TipoReceita();
-			tipoReceita.setId(Integer.valueOf(campos[12]));
-			
+			tipoReceita.setId(Integer.valueOf(campos[9]));
+
 			Receita receita = new Receita();
-			receita.setCodigo(Integer.valueOf(campos[0]));
-			receita.setTitulo(campos[2]);
-			receita.setDescricao(campos[3]);
-			receita.setQuantidade(Integer.valueOf(campos[4]));
-			receita.setMedida(campos[5]);
-			receita.setTempoPreparo(Integer.valueOf(campos[6]));
-			receita.setAnexos(campos[7]);
-			receita.setAprovada(campos[8]);
-			receita.setCodigoTipo(Integer.valueOf(campos[9]));
-			receita.setCatalogada(campos[10]);
-			receita.setDataPublicacao(campos[11]);
-			receita.setTipoReceita(tipoReceita);
-			receita.setUsuario(usuario);
+			receita.setTitulo(campos[0]);
+			receita.setDescricao(campos[1]);
+			receita.setQuantidade(Double.valueOf(campos[2]));
+			receita.setMedida(campos[3]);
+			receita.setTempoPreparo(Integer.valueOf(campos[4]));
+			receita.setAnexos(campos[5]);
+			receita.setAprovada(campos[6]);
+			receita.setCatalogada(campos[7]);
+		    receita.setDataPublicacao(LocalDate.parse(campos[8]));
 			
 			receitaService.incluirReceita(receita);
 			

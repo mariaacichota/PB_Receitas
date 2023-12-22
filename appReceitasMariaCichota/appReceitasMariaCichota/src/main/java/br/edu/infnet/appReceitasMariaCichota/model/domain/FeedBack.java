@@ -23,9 +23,12 @@ public class FeedBack {
 		Id = id;
 	}
 
-	private int codigo;
 	private String descricao;
-	private int codigoReceita;
+
+	@ManyToOne
+	@JoinColumn(name = "idReceita")
+	private Receita receita;
+	
 	private int iLike;
 	private int iDeslike;
 
@@ -44,7 +47,7 @@ public class FeedBack {
 	@Override
 	public String toString() {
 
-		return String.format("Codigo (%d) - Descrição (%s) ", codigo, descricao);
+		return String.format("Codigo (%d) - Descrição (%s) ", Id, descricao);
 	}
 	
 	public FeedBack (Integer id) {
@@ -52,14 +55,6 @@ public class FeedBack {
 	}
 	
 	public FeedBack () {
-	}
-
-	public int getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
 	}
 
 	public String getDescricao() {
@@ -70,12 +65,12 @@ public class FeedBack {
 		this.descricao = descricao;
 	}
 
-	public int getCodigoReceita() {
-		return codigoReceita;
+	public Receita getCodigoReceita() {
+		return receita;
 	}
 
-	public void setCodigoReceita(int codigoReceita) {
-		this.codigoReceita = codigoReceita;
+	public void setCodigoReceita(Receita receita) {
+		this.receita = receita;
 	}
 
 	public int getiLike() {

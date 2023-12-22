@@ -32,14 +32,13 @@ public class UsuarioLoader implements ApplicationRunner {
 			campos = linha.split(";");
 			
 			Usuario usuario = new Usuario();
-			usuario.setCodigo(Integer.valueOf(campos[0]));
-			usuario.setNome(campos[1]);
-			usuario.setEndereco(new Endereco(campos[2]));
-			usuario.setEmail(campos[3]);
-			usuario.setTelefone(campos[4]);
-			usuario.setSenha(campos[5]);
-			usuario.setFoto(campos[6]);
-			usuario.setDescricao(campos[7]);
+			usuario.setNome(campos[0]);
+			usuario.setEndereco(new Endereco(campos[1]));
+			usuario.setEmail(campos[2]);
+			usuario.setTelefone(campos[3]);
+			usuario.setSenha(campos[4]);
+			usuario.setFoto(campos[5]);
+			usuario.setDescricao(campos[6]);
 			
 			usuarioService.incluirUsuario(usuario);
 			

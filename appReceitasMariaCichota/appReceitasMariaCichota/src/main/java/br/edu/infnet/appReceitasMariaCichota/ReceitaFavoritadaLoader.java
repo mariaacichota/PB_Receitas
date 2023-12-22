@@ -9,6 +9,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import br.edu.infnet.appReceitasMariaCichota.model.domain.Receita;
 import br.edu.infnet.appReceitasMariaCichota.model.domain.ReceitaFavoritada;
 import br.edu.infnet.appReceitasMariaCichota.model.domain.Usuario;
 import br.edu.infnet.appReceitasMariaCichota.model.service.ReceitaFavoritadaService;
@@ -32,14 +33,16 @@ public class ReceitaFavoritadaLoader implements ApplicationRunner {
 			campos = linha.split(";");
 			
 			Usuario usuario = new Usuario();
-			usuario.setId(Integer.valueOf(campos[5]));
+			usuario.setId(Integer.valueOf(campos[4]));
+			
+			Receita receita = new Receita();
+			receita.setId(Integer.valueOf(campos[0]));
 			
 			ReceitaFavoritada receitaFavoritada = new ReceitaFavoritada();
-			receitaFavoritada.setCodigo(Integer.valueOf(campos[0]));
-			receitaFavoritada.setCodigoReceita(Integer.valueOf(campos[1]));
-			receitaFavoritada.setDataModificacao(campos[2]);
-			receitaFavoritada.setiLike(Integer.valueOf(campos[3]));
-			receitaFavoritada.setiDeslike(Integer.valueOf(campos[4]));
+			receitaFavoritada.setCodigoReceita(receita);
+			receitaFavoritada.setDataModificacao(campos[1]);
+			receitaFavoritada.setiLike(Integer.valueOf(campos[2]));
+			receitaFavoritada.setiDeslike(Integer.valueOf(campos[3]));
 			receitaFavoritada.setUsuario(usuario);
 			
 			receitaFavoritadaService.incluirReceitaFavoritada(receitaFavoritada);
